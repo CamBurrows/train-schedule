@@ -62,7 +62,7 @@ $(document).ready(function(){
 
         currentTime = moment().format("HH:mm")
         
-        var totalTimeBetween = currentTime.diff(moment(firstTimeConverted), "minutes");
+        var totalTimeBetween = moment(currentTime).diff(moment(firstTimeConverted), "minutes");
         console.log("time difference: " + totalTimeBetween);
 
         if (totalTimeBeween < 0){
