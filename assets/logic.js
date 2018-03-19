@@ -58,19 +58,16 @@ $(document).ready(function(){
         console.log("train frequency: " + trainFrequency);
 
         
-        var firstTimeConverted = moment(trainInitialTime, "HH:mm");
+        var firstTimeConverted = moment(trainInitialTime, "HH:mm").subtract(1, "years");
+        console.log(firstTimeConverted);
 
-        currentTime = moment().format("HH:mm")
+        var currentTime = moment();
+        console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
         
-        var totalTimeBetween = moment(currentTime).diff(moment(firstTimeConverted), "minutes");
-        console.log("time difference: " + totalTimeBetween);
+        var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+        console.log("DIFFERENCE IN TIME: " + diffTime);
 
-        if (totalTimeBeween < 0){
-        
-        var posTotalTimeBetween = Math.abs(totalTimeBetween);
-        console.log("positive time difference: " + posTotalTimeBetween);
-
-        var remainder = posTotalTimeBetween % trainFrequency;
+        var remainder = diffTime % trainFrequency;
         console.log("Time remainder: " + remainder);
 
         var minutesUntilTrain = trainFrequency - remainder;
@@ -81,26 +78,8 @@ $(document).ready(function(){
 
         var nextTrainTime = moment(nextTrain).format("hh:mm a");
 
-        }
-
-        else if (totalTimeBetween > 0){
         
-
-        // var remainder = posTotalTimeBetween % trainFrequency;
-        // console.log("Time remainder: " + remainder);
-
-        var minutesUntilTrain = moment(firstTimeConverted).diff(moment(currentTime));
-        console.log("Minutes Until Next Train: " + minutesUntilTrain);
-
-        var nextTrain = firstTimeConverted;
-        console.log("Arrival Time: " + moment(nextTrain).format("hh:mm"));
-
-        var nextTrainTime = moment(nextTrain).format("hh:mm a");
-
-        }
-
-        
-        var newRow = $("<tr>")
+        var newRow = $("<tr>");
         newRow.append($("<td>"+ trainName + "</td><td>"+ trainDestination + "</td><td>"+ trainFrequency+ "</td><td>"+ nextTrainTime+ "</td><td>" + minutesUntilTrain+ "</td>"));
         $("tbody").prepend(newRow);
 
