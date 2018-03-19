@@ -60,9 +60,13 @@ $(document).ready(function(){
         
         var firstTimeConverted = moment(trainInitialTime, "HH:mm");
 
-        var totalTimeBetween = moment().diff(moment(firstTimeConverted), "minutes");
+        currentTime = moment().format("HH:mm")
+        
+        var totalTimeBetween = currentTime.diff(moment(firstTimeConverted), "minutes");
         console.log("time difference: " + totalTimeBetween);
 
+        if (totalTimeBeween < 0){
+        
         var posTotalTimeBetween = Math.abs(totalTimeBetween);
         console.log("positive time difference: " + posTotalTimeBetween);
 
@@ -76,6 +80,24 @@ $(document).ready(function(){
         console.log("Arrival Time: " + moment(nextTrain).format("hh:mm"));
 
         var nextTrainTime = moment(nextTrain).format("hh:mm a");
+
+        }
+
+        else if (totalTimeBetween > 0){
+        
+
+        // var remainder = posTotalTimeBetween % trainFrequency;
+        // console.log("Time remainder: " + remainder);
+
+        var minutesUntilTrain = moment(firstTimeConverted).diff(moment(currentTime));
+        console.log("Minutes Until Next Train: " + minutesUntilTrain);
+
+        var nextTrain = firstTimeConverted;
+        console.log("Arrival Time: " + moment(nextTrain).format("hh:mm"));
+
+        var nextTrainTime = moment(nextTrain).format("hh:mm a");
+
+        }
 
         
         var newRow = $("<tr>")
